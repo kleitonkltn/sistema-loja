@@ -51,22 +51,36 @@
     <Component class="javax.swing.JButton" name="botaoProdutos">
       <Properties>
         <Property name="text" type="java.lang.String" value="Produtos"/>
+        <Property name="horizontalTextPosition" type="int" value="0"/>
+        <Property name="verticalTextPosition" type="int" value="3"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="botaoClientes">
       <Properties>
         <Property name="text" type="java.lang.String" value="Clientes"/>
+        <Property name="horizontalTextPosition" type="int" value="0"/>
+        <Property name="verticalTextPosition" type="int" value="3"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoClientesActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="botaoUsuarios">
       <Properties>
         <Property name="text" type="java.lang.String" value="Usuarios"/>
+        <Property name="horizontalTextPosition" type="int" value="0"/>
+        <Property name="verticalTextPosition" type="int" value="3"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="botaoFornecedores">
       <Properties>
         <Property name="text" type="java.lang.String" value="Fornecedores"/>
+        <Property name="horizontalTextPosition" type="int" value="0"/>
+        <Property name="verticalTextPosition" type="int" value="3"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botaoFornecedoresActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -3,6 +3,7 @@ package br.edu.ifms.loja.fornecedor.bo;
 import br.edu.ifms.loja.fornecedor.dao.FornecedorDAO;
 import br.edu.ifms.loja.fornecedor.datamodel.Fornecedor;
 import java.sql.SQLException;
+import java.util.List;
 
 public class FornecedorBO {
 
@@ -11,8 +12,21 @@ public class FornecedorBO {
     public FornecedorBO() throws SQLException {
         dao = new FornecedorDAO();
     }
-
-    public Fornecedor buscarFornecedorPorCod(Long cod) {
-        return dao.buscarFornecedorPorCod(cod);
+    
+    public void inserirFornecedor(Fornecedor fornecedor){
+        dao.inserir(fornecedor);
     }
+    
+    public void removerFornecedor(Fornecedor fornecedor){
+        dao.remover(fornecedor);
+    }
+    
+    public List<Fornecedor> listarTodos(){
+        return dao.listarTodos();
+    }
+    
+    public Fornecedor buscarPorId(Long id){
+        return dao.buscarPorId(id);
+    }
+
 }

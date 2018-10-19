@@ -5,13 +5,25 @@
  */
 package br.edu.ifms.loja.app.view;
 
+import br.edu.ifms.loja.cliente.view.CadastroCliente;
+import br.edu.ifms.loja.fornecedor.view.CadastroFornecedor;
+import br.ifms.edu.lpii.app.utils.ImagemUtils;
+import java.io.IOException;
+import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Gustavo
  */
 public class JanelaInternaCadastros extends javax.swing.JInternalFrame {
+
+    private final String CAMINHO_ICONES = "img\\icons";
+    private final String ICONE_CLIENTES = "network.png";
+    private final String ICONE_PRODUTOS = "packing-3.png";
+    private final String ICONE_USUARIOS = "id-card.png";
+    private final String ICONE_FORNECEDORES = "trucking.png";
 
     public static JanelaInternaCadastros janelaInternaVendas;
 
@@ -20,6 +32,7 @@ public class JanelaInternaCadastros extends javax.swing.JInternalFrame {
         setTitle("Cadastros");
         setDefaultCloseOperation(JInternalFrame.HIDE_ON_CLOSE);
         setClosable(true);
+        carregarIcones();
     }
 
     public static JanelaInternaCadastros getInstance() {
@@ -27,6 +40,24 @@ public class JanelaInternaCadastros extends javax.swing.JInternalFrame {
             janelaInternaVendas = new JanelaInternaCadastros();
         }
         return janelaInternaVendas;
+    }
+
+    private void carregarIcones() {
+        try {
+            ImageIcon clientes = new ImageIcon(ImagemUtils.loadImage(CAMINHO_ICONES + "\\" + ICONE_CLIENTES));
+            botaoClientes.setIcon(clientes);
+
+            ImageIcon fornecedores = new ImageIcon(ImagemUtils.loadImage(CAMINHO_ICONES + "\\" + ICONE_FORNECEDORES));
+            botaoFornecedores.setIcon(fornecedores);
+            
+            ImageIcon produtos = new ImageIcon(ImagemUtils.loadImage(CAMINHO_ICONES + "\\" + ICONE_PRODUTOS));
+            botaoProdutos.setIcon(produtos);
+            
+            ImageIcon usuarios = new ImageIcon(ImagemUtils.loadImage(CAMINHO_ICONES + "\\" + ICONE_USUARIOS));
+            botaoUsuarios.setIcon(usuarios);
+        } catch (IOException ex) {
+            JOptionPane.showMessageDialog(this, "Impossível carregar icones de botões!", "Problema", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /**
@@ -44,12 +75,30 @@ public class JanelaInternaCadastros extends javax.swing.JInternalFrame {
         botaoFornecedores = new javax.swing.JButton();
 
         botaoProdutos.setText("Produtos");
+        botaoProdutos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        botaoProdutos.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         botaoClientes.setText("Clientes");
+        botaoClientes.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        botaoClientes.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        botaoClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoClientesActionPerformed(evt);
+            }
+        });
 
         botaoUsuarios.setText("Usuarios");
+        botaoUsuarios.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        botaoUsuarios.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
 
         botaoFornecedores.setText("Fornecedores");
+        botaoFornecedores.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        botaoFornecedores.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        botaoFornecedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoFornecedoresActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -80,6 +129,16 @@ public class JanelaInternaCadastros extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void botaoClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoClientesActionPerformed
+        CadastroCliente cadastroCliente = new CadastroCliente(null, true);
+        cadastroCliente.setVisible(true);
+    }//GEN-LAST:event_botaoClientesActionPerformed
+
+    private void botaoFornecedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoFornecedoresActionPerformed
+        CadastroFornecedor cadastroFornecedor = new CadastroFornecedor(null, true);
+        cadastroFornecedor.setVisible(true);
+    }//GEN-LAST:event_botaoFornecedoresActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

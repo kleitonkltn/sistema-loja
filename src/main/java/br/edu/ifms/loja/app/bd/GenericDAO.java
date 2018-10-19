@@ -5,7 +5,6 @@
  */
 package br.edu.ifms.loja.app.bd;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 
@@ -15,33 +14,57 @@ import javax.persistence.EntityManager;
  */
 public class GenericDAO <T>{
     private EntityManager em;
-
-    public GenericDAO() {
-        
+    private Class<T> clazz;
+    
+    public GenericDAO(Class<T> clazz) {
+        em = FabricaDeGerenciadorDeEntidades.getEntityManager();
+        this.clazz = clazz;
+    }
+    
+    public void abrirTransacao(){
+        em.getTransaction().begin();
+    }
+    
+    public void commit(){
+        em.getTransaction().commit();
+    }
+    
+    public void rollback(){
+        em.getTransaction().rollback();
     }
     
     public void inserir(T t){
-        
+        abrirTransacao();
+        em.persist(t);
+        commit();
     }
     
     public void atualizar(T t){
-        
+        abrirTransacao();
+        em.merge(t);
+        commit();
     }
     
     public void remover(Long id){
-        
+        abrirTransacao();
+        T t = buscarPorId(id);
+        em.remove(t);
+        commit();
     }
     
     public void remover(T t){
-     
+        abrirTransacao();
+        em.remove(t);
+        commit();
     }
     
     public T buscarPorId(Long id){
-        return null;
+        return em.find(clazz, id);
     }
     
-    public List<T> listarTodos(Class clazz){
-        return new ArrayList<>();
+    public List<T> listarTodos(){
+        return em.createQuery("SELECT t FROM "+clazz.getSimpleName()+" t")         
+                .getResultList();
     }
 
     public EntityManager getEntityManager() {
