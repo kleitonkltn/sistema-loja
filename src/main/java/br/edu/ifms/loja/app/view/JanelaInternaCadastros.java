@@ -24,6 +24,8 @@ public class JanelaInternaCadastros extends javax.swing.JInternalFrame {
     private final String ICONE_PRODUTOS = "packing-3.png";
     private final String ICONE_USUARIOS = "id-card.png";
     private final String ICONE_FORNECEDORES = "trucking.png";
+    private final String ICONE_UF = "map.png";
+    private final String ICONE_CIDADE = "cityscape.png";
 
     public static JanelaInternaCadastros janelaInternaVendas;
 
@@ -49,12 +51,18 @@ public class JanelaInternaCadastros extends javax.swing.JInternalFrame {
 
             ImageIcon fornecedores = new ImageIcon(ImagemUtils.loadImage(CAMINHO_ICONES + "\\" + ICONE_FORNECEDORES));
             botaoFornecedores.setIcon(fornecedores);
-            
+
             ImageIcon produtos = new ImageIcon(ImagemUtils.loadImage(CAMINHO_ICONES + "\\" + ICONE_PRODUTOS));
             botaoProdutos.setIcon(produtos);
-            
+
             ImageIcon usuarios = new ImageIcon(ImagemUtils.loadImage(CAMINHO_ICONES + "\\" + ICONE_USUARIOS));
             botaoUsuarios.setIcon(usuarios);
+            
+            ImageIcon cidades = new ImageIcon(ImagemUtils.loadImage(CAMINHO_ICONES + "\\" + ICONE_CIDADE));
+            botaoCidades.setIcon(cidades);
+            
+            ImageIcon ufs = new ImageIcon(ImagemUtils.loadImage(CAMINHO_ICONES + "\\" + ICONE_UF));
+            botaoUFs.setIcon(ufs);
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, "Impossível carregar icones de botões!", "Problema", JOptionPane.ERROR_MESSAGE);
         }
@@ -73,6 +81,8 @@ public class JanelaInternaCadastros extends javax.swing.JInternalFrame {
         botaoClientes = new javax.swing.JButton();
         botaoUsuarios = new javax.swing.JButton();
         botaoFornecedores = new javax.swing.JButton();
+        botaoUFs = new javax.swing.JButton();
+        botaoCidades = new javax.swing.JButton();
 
         botaoProdutos.setText("Produtos");
         botaoProdutos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -100,30 +110,59 @@ public class JanelaInternaCadastros extends javax.swing.JInternalFrame {
             }
         });
 
+        botaoUFs.setText("UFs");
+        botaoUFs.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        botaoUFs.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        botaoUFs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoUFsActionPerformed(evt);
+            }
+        });
+
+        botaoCidades.setText("Cidades");
+        botaoCidades.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        botaoCidades.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        botaoCidades.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoCidadesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(botaoProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(botaoClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(botaoUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(botaoFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(botaoProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(botaoFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(botaoClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(botaoUFs, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(botaoCidades, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(botaoUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botaoProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botaoClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(botaoUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(botaoProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(botaoClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(botaoFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(botaoUFs, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botaoCidades, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botaoUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -140,11 +179,21 @@ public class JanelaInternaCadastros extends javax.swing.JInternalFrame {
         cadastroFornecedor.setVisible(true);
     }//GEN-LAST:event_botaoFornecedoresActionPerformed
 
+    private void botaoUFsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoUFsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botaoUFsActionPerformed
+
+    private void botaoCidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCidadesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_botaoCidadesActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botaoCidades;
     private javax.swing.JButton botaoClientes;
     private javax.swing.JButton botaoFornecedores;
     private javax.swing.JButton botaoProdutos;
+    private javax.swing.JButton botaoUFs;
     private javax.swing.JButton botaoUsuarios;
     // End of variables declaration//GEN-END:variables
 }
