@@ -27,6 +27,16 @@ public abstract class GenericCRUD<T> extends javax.swing.JDialog {
     private Class clazz;
     private String[] cabecalhoTabela;
 
+    /**
+     * @param parent
+     * Determina quem é a janela pai
+     * @param modal
+     * Determina se a janela irá ser moral
+     * @param clazz
+     * Classe de modelo de dados(datamodel) no qual a janela irá se moldar
+     * @param cabecalhoTabela
+     * Campos a serem mostrados na tabela
+     */
     public GenericCRUD(java.awt.Frame parent, boolean modal, Class clazz, String[] cabecalhoTabela) {
         super(parent, modal);
 
@@ -38,6 +48,9 @@ public abstract class GenericCRUD<T> extends javax.swing.JDialog {
         aoInicializar();
     }
 
+    /**
+     * Método que define o formulario do CRUD
+     */
     protected abstract JPanel criarFormulario();
 
     /**
@@ -120,6 +133,9 @@ public abstract class GenericCRUD<T> extends javax.swing.JDialog {
         botaoEditar.setEnabled(false);
     }
 
+    /**
+     * Método invocado ao clicar no botao Novo
+     */
     private void aoClicarEmNovo() {
         novo();
         objetoParaCampos();
@@ -131,6 +147,9 @@ public abstract class GenericCRUD<T> extends javax.swing.JDialog {
         botaoEditar.setEnabled(false);
     }
 
+    /**
+     * Método invocado ao clicar no botao Salvar
+     */
     private void aoClicarEmSalvar() {
         camposParaObjeto();
         salvar();
@@ -143,6 +162,9 @@ public abstract class GenericCRUD<T> extends javax.swing.JDialog {
         botaoEditar.setEnabled(true);
     }
 
+    /**
+     * Método invocado ao clicar no botao Editar
+     */
     private void aoClicarEmEditar() {
         objetoParaCampos();
         editar();
@@ -154,6 +176,9 @@ public abstract class GenericCRUD<T> extends javax.swing.JDialog {
         botaoEditar.setEnabled(false);
     }
 
+    /**
+     * Método invocado ao clicar no botao Excluir
+     */
     private void aoClicarEmExcluir() {
         int op = JOptionPane.showConfirmDialog(this, "Deseja realmente excluir este registro?", "Exclusão", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
 
@@ -170,6 +195,9 @@ public abstract class GenericCRUD<T> extends javax.swing.JDialog {
         botaoEditar.setEnabled(false);
     }
 
+    /**
+     * Método invocado ao clicar no botao Cancelar
+     */
     private void aoClicarEmCancelar() {
         objetoParaCampos();
         cancelar();
@@ -182,11 +210,17 @@ public abstract class GenericCRUD<T> extends javax.swing.JDialog {
         botaoEditar.setEnabled(false);
     }
 
+    /**
+     * Método invocado ao clicar ao apertar enter no campo de busca
+     */
     private void aoApertarEnterNoCampoDeBusca() {
         List<T> lista = buscar(campoBuscar.getText());
         objectTableModel.setData(lista);
     }
 
+    /**
+     * Método invocado ao selecionar algum item na tabela
+     */
     private void aoSelecionarItemNaTabela() {
         int index = tabela.getSelectedRow();
 
@@ -207,11 +241,18 @@ public abstract class GenericCRUD<T> extends javax.swing.JDialog {
         botaoEditar.setEnabled(true);
     }
 
+    /**
+     * Método que coloca uma lista advinda da implementacao do metodo
+     * carregarListaParaTabela() e coloca na tabela
+     */
     public void carregarTabela() {
         List<T> dados = carregarListaParaTabela();
         objectTableModel.setData(dados);
     }
 
+    /**
+     * Método que inicializa o ObjectTableModel
+     */
     private void inicializarObjectTableModel(String[] cabecalhoTabela) {
         StringBuilder campos = new StringBuilder();
         for (String campo : cabecalhoTabela) {
@@ -232,6 +273,9 @@ public abstract class GenericCRUD<T> extends javax.swing.JDialog {
         ControleDeFormulario.desabilitarCampos(painelFormulario);
     }
 
+    /**
+     * Método invocado ao construir a janela, responsável por carregar os icones
+     */
     private void carregarIcones() {
         try {
             ImageIcon novo = new ImageIcon(ImagemUtils.loadImage(CAMINHO_ICONES + "\\" + ICONE_NOVO));
@@ -251,7 +295,7 @@ public abstract class GenericCRUD<T> extends javax.swing.JDialog {
 
             ImageIcon buscar = new ImageIcon(ImagemUtils.loadImage(CAMINHO_ICONES + "\\" + ICONE_BUSCAR));
             labelBuscar.setIcon(buscar);
-            
+
         } catch (IOException ex) {
             JOptionPane.showMessageDialog(this, "Impossível carregar icones de botões!", "Problema", JOptionPane.ERROR_MESSAGE);
         }

@@ -12,8 +12,6 @@ import javax.swing.JPanel;
 
 public class ClienteCRUD extends GenericCRUD<Cliente> {
 
-    private String[] cabecalhoTabela;
-
     private Cliente cliente;
     private ClienteBO clienteBO;
     private ClienteFormulario formularioCliente;
