@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
-public abstract class LayoutJanelaDeCadastro<T> extends javax.swing.JDialog {
+public abstract class GenericCRUD<T> extends javax.swing.JDialog {
 
     private final String CAMINHO_ICONES = "img\\mini-icons";
     private final String ICONE_NOVO = "Add.png";
@@ -27,7 +27,7 @@ public abstract class LayoutJanelaDeCadastro<T> extends javax.swing.JDialog {
     private Class clazz;
     private String[] cabecalhoTabela;
 
-    public LayoutJanelaDeCadastro(java.awt.Frame parent, boolean modal, Class clazz, String[] cabecalhoTabela) {
+    public GenericCRUD(java.awt.Frame parent, boolean modal, Class clazz, String[] cabecalhoTabela) {
         super(parent, modal);
 
         this.clazz = clazz;

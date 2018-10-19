@@ -1,6 +1,6 @@
 package br.edu.ifms.loja.cliente.view;
 
-import br.edu.ifms.loja.app.layouts.LayoutJanelaDeCadastro;
+import br.edu.ifms.loja.app.layouts.GenericCRUD;
 import br.edu.ifms.loja.cliente.bo.ClienteBO;
 import br.edu.ifms.loja.cliente.datamodel.Cliente;
 import java.awt.Frame;
@@ -10,15 +10,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JPanel;
 
-public class CadastroCliente extends LayoutJanelaDeCadastro<Cliente> {
+public class ClienteCRUD extends GenericCRUD<Cliente> {
 
     private String[] cabecalhoTabela;
 
     private Cliente cliente;
     private ClienteBO clienteBO;
-    private FormularioCliente formularioCliente;
+    private ClienteFormulario formularioCliente;
 
-    public CadastroCliente(Frame parent, boolean modal) {
+    public ClienteCRUD(Frame parent, boolean modal) {
         super(parent, modal, Cliente.class, new String[]{"id", "nome", "email"});
 
         try {
@@ -26,7 +26,7 @@ public class CadastroCliente extends LayoutJanelaDeCadastro<Cliente> {
             carregarTabela();
          
         } catch (SQLException ex) {
-            Logger.getLogger(CadastroCliente.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ClienteCRUD.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -37,7 +37,7 @@ public class CadastroCliente extends LayoutJanelaDeCadastro<Cliente> {
 
     @Override
     protected JPanel criarFormulario() {
-        formularioCliente = new FormularioCliente();
+        formularioCliente = new ClienteFormulario();
         formularioCliente.setVisible(true);
         return formularioCliente;
     }

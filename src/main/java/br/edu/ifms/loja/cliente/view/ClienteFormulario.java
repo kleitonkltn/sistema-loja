@@ -12,12 +12,12 @@ import javax.swing.JTextField;
  *
  * @author Gustavo
  */
-public class FormularioCliente extends javax.swing.JPanel {
+public class ClienteFormulario extends javax.swing.JPanel {
 
     /**
      * Creates new form FormularioCliente
      */
-    public FormularioCliente() {
+    public ClienteFormulario() {
         initComponents();
     }
 

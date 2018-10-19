@@ -11,12 +11,12 @@ import javax.swing.JTextField;
  *
  * @author Gustavo
  */
-public class FormularioFornecedor2 extends javax.swing.JPanel {
+public class FornecedorFormulario extends javax.swing.JPanel {
 
     /**
      * Creates new form FormularioFornecedor2
      */
-    public FormularioFornecedor2() {
+    public FornecedorFormulario() {
         initComponents();
     }
 

@@ -5,8 +5,8 @@
  */
 package br.edu.ifms.loja.app.view;
 
-import br.edu.ifms.loja.cliente.view.CadastroCliente;
-import br.edu.ifms.loja.fornecedor.view.CadastroFornecedor;
+import br.edu.ifms.loja.cliente.view.ClienteCRUD;
+import br.edu.ifms.loja.fornecedor.view.FornecedorCRUD;
 import br.ifms.edu.lpii.app.utils.ImagemUtils;
 import java.io.IOException;
 import javax.swing.ImageIcon;
@@ -131,12 +131,12 @@ public class JanelaInternaCadastros extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoClientesActionPerformed
-        CadastroCliente cadastroCliente = new CadastroCliente(null, true);
+        ClienteCRUD cadastroCliente = new ClienteCRUD(null, true);
         cadastroCliente.setVisible(true);
     }//GEN-LAST:event_botaoClientesActionPerformed
 
     private void botaoFornecedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoFornecedoresActionPerformed
-        CadastroFornecedor cadastroFornecedor = new CadastroFornecedor(null, true);
+        FornecedorCRUD cadastroFornecedor = new FornecedorCRUD(null, true);
         cadastroFornecedor.setVisible(true);
     }//GEN-LAST:event_botaoFornecedoresActionPerformed
 

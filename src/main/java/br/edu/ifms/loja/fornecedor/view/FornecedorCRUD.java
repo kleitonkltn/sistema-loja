@@ -5,7 +5,7 @@
  */
 package br.edu.ifms.loja.fornecedor.view;
 
-import br.edu.ifms.loja.app.layouts.LayoutJanelaDeCadastro;
+import br.edu.ifms.loja.app.layouts.GenericCRUD;
 import br.edu.ifms.loja.fornecedor.bo.FornecedorBO;
 import br.edu.ifms.loja.fornecedor.datamodel.Fornecedor;
 import java.awt.Frame;
@@ -19,20 +19,20 @@ import javax.swing.JPanel;
  *
  * @author Gustavo
  */
-public class CadastroFornecedor extends LayoutJanelaDeCadastro<Fornecedor> {
+public class FornecedorCRUD extends GenericCRUD<Fornecedor> {
     
     private Fornecedor fornencedor;
     private FornecedorBO fornecedorBO;
-    private FormularioFornecedor2 formularioFornecedor2;
+    private FornecedorFormulario formularioFornecedor2;
     
-    public CadastroFornecedor(Frame parent, boolean modal) {
+    public FornecedorCRUD(Frame parent, boolean modal) {
         super(parent, modal, Fornecedor.class, new String[]{"id", "nome", "cnpj"});
         
         try {
             fornecedorBO = new FornecedorBO();
             carregarTabela();
         } catch (SQLException ex) {
-            Logger.getLogger(CadastroFornecedor.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FornecedorCRUD.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -43,7 +43,7 @@ public class CadastroFornecedor extends LayoutJanelaDeCadastro<Fornecedor> {
     
     @Override
     protected JPanel criarFormulario() {
-        formularioFornecedor2 = new FormularioFornecedor2();
+        formularioFornecedor2 = new FornecedorFormulario();
         return formularioFornecedor2;
     }
     
