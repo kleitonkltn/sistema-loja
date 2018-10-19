@@ -62,7 +62,7 @@ public class ClienteCRUD extends GenericCRUD<Cliente> {
 
     @Override
     protected void salvar() {
-        clienteBO.inserirCiente(cliente);
+        clienteBO.inserir(cliente);
     }
 
     @Override
@@ -82,7 +82,7 @@ public class ClienteCRUD extends GenericCRUD<Cliente> {
 
     @Override
     protected void excluir() {
-        clienteBO.excluirCliente(cliente.getId());
+        clienteBO.remover(cliente.getId());
     }
 
     @Override
@@ -92,7 +92,7 @@ public class ClienteCRUD extends GenericCRUD<Cliente> {
 
     @Override
     protected List<Cliente> carregarListaParaTabela() {
-        return clienteBO.listarTodosOsClientes();
+        return clienteBO.listarTodos();
     }
 
     @Override

@@ -1,6 +1,6 @@
 package br.edu.ifms.loja.cliente.dao;
 
-import br.edu.ifms.loja.app.bd.GenericDAO;
+import br.edu.ifms.loja.app.dao.GenericDAO;
 import br.edu.ifms.loja.cliente.datamodel.Cliente;
 import java.util.List;
 import javax.persistence.EntityManager;

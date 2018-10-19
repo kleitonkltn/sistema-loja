@@ -61,7 +61,7 @@ public class FornecedorCRUD extends GenericCRUD<Fornecedor> {
     
     @Override
     protected void salvar() {
-        fornecedorBO.inserirFornecedor(fornencedor);
+        fornecedorBO.inserir(fornencedor);
     }
     
     @Override
@@ -81,7 +81,7 @@ public class FornecedorCRUD extends GenericCRUD<Fornecedor> {
     
     @Override
     protected void excluir() {
-        fornecedorBO.removerFornecedor(fornencedor);
+        fornecedorBO.remover(fornencedor);
     }
     
     @Override

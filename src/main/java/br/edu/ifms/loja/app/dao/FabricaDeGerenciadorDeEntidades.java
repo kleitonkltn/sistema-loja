@@ -1,4 +1,4 @@
-package br.edu.ifms.loja.app.bd;
+package br.edu.ifms.loja.app.dao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;

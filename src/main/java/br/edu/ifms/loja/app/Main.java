@@ -5,7 +5,7 @@
  */
 package br.edu.ifms.loja.app;
 
-import br.edu.ifms.loja.app.bd.FabricaDeGerenciadorDeEntidades;
+import br.edu.ifms.loja.app.dao.FabricaDeGerenciadorDeEntidades;
 import br.edu.ifms.loja.app.view.JanelaPrincipal;
 import java.util.logging.Level;
 import java.util.logging.Logger;

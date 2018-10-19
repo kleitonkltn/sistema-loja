@@ -1,29 +1,18 @@
 package br.edu.ifms.loja.cliente.bo;
 
+import br.edu.ifms.loja.app.bo.GenericBO;
 import br.edu.ifms.loja.cliente.dao.ClienteDAO;
 import br.edu.ifms.loja.cliente.datamodel.Cliente;
-import br.edu.ifms.loja.cliente.exception.NomeInvalidoException;
 import java.sql.SQLException;
 import java.util.List;
 
-public class ClienteBO {
+public class ClienteBO extends GenericBO<Cliente>{
 
     private ClienteDAO daoCliente;
 
     public ClienteBO() throws SQLException {
+        super(Cliente.class);
         daoCliente = new ClienteDAO();
-    }
-
-    public void inserirCiente(Cliente cliente) {
-        daoCliente.inserir(cliente);
-    }
-
-    public void atualizarCliente(Cliente cliente) {
-        daoCliente.atualizar(cliente);
-    }
-
-    public void excluirCliente(Long id) {
-        daoCliente.remover(id);
     }
 
     public List<Cliente> buscarClientePorCpf(String cpf) {
@@ -34,10 +23,6 @@ public class ClienteBO {
         return daoCliente.buscarClientePorNome(nome);
     }
 
-    public List<Cliente> listarTodosOsClientes() {
-        return daoCliente.listarTodos();
-    }
-    
     public List<Cliente> buscarClientePorNomeOuCPF(String param){
         return daoCliente.buscarClientePorNomeOuCPF(param, param);
     }
