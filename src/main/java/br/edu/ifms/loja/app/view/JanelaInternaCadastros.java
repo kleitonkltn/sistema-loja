@@ -7,6 +7,7 @@ package br.edu.ifms.loja.app.view;
 
 import br.edu.ifms.loja.cliente.view.ClienteCRUD;
 import br.edu.ifms.loja.fornecedor.view.FornecedorCRUD;
+import br.edu.ifms.loja.uf.view.UFCRUD;
 import br.ifms.edu.lpii.app.utils.ImagemUtils;
 import java.io.IOException;
 import javax.swing.ImageIcon;
@@ -154,9 +155,9 @@ public class JanelaInternaCadastros extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(botaoProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(botaoClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(botaoClientes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(botaoProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(botaoFornecedores, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -180,7 +181,8 @@ public class JanelaInternaCadastros extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_botaoFornecedoresActionPerformed
 
     private void botaoUFsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoUFsActionPerformed
-        // TODO add your handling code here:
+        UFCRUD cadastroUf = new  UFCRUD(null, true);
+        cadastroUf.setVisible(true);
     }//GEN-LAST:event_botaoUFsActionPerformed
 
     private void botaoCidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCidadesActionPerformed

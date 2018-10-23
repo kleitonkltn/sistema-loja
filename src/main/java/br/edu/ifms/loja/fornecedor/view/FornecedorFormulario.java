@@ -5,6 +5,7 @@
  */
 package br.edu.ifms.loja.fornecedor.view;
 
+import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
 /**
@@ -21,20 +22,77 @@ public class FornecedorFormulario extends javax.swing.JPanel {
     }
 
     public JTextField getCampoCNPJ() {
-        return campoCNPJ;
+        return CampoCNPJ;
     }
 
-    public void setCampoCNPJ(JTextField campoCNPJ) {
-        this.campoCNPJ = campoCNPJ;
+    public void setCampoCNPJ(JTextField CampoCNPJ) {
+        this.CampoCNPJ = CampoCNPJ;
     }
 
-    public JTextField getCampoNome() {
-        return campoNome;
+    public JTextField getCampoCEP() {
+        return campoCEP;
     }
 
-    public void setCampoNome(JTextField campoNome) {
-        this.campoNome = campoNome;
+    public void setCampoCEP(JTextField campoCEP) {
+        this.campoCEP = campoCEP;
     }
+
+    public JComboBox<String> getCampoCidade() {
+        return campoCidade;
+    }
+
+    public void setCampoCidade(JComboBox<String> campoCidade) {
+        this.campoCidade = campoCidade;
+    }
+
+    public JTextField getCampoEmail() {
+        return campoEmail;
+    }
+
+    public void setCampoEmail(JTextField campoEmail) {
+        this.campoEmail = campoEmail;
+    }
+
+    public JTextField getCampoEndereco() {
+        return campoEndereco;
+    }
+
+    public void setCampoEndereco(JTextField campoEndereco) {
+        this.campoEndereco = campoEndereco;
+    }
+
+    public JTextField getCampoNomeFantasia() {
+        return campoNomeFantasia;
+    }
+
+    public void setCampoNomeFantasia(JTextField campoNomeFantasia) {
+        this.campoNomeFantasia = campoNomeFantasia;
+    }
+
+    public JTextField getCampoNumero() {
+        return campoNumero;
+    }
+
+    public void setCampoNumero(JTextField campoNumero) {
+        this.campoNumero = campoNumero;
+    }
+
+    public JTextField getCampoRazaoSocial() {
+        return campoRazaoSocial;
+    }
+
+    public void setCampoRazaoSocial(JTextField campoRazaoSocial) {
+        this.campoRazaoSocial = campoRazaoSocial;
+    }
+
+    public JTextField getCampoTelefone() {
+        return campoTelefone;
+    }
+
+    public void setCampoTelefone(JTextField campoTelefone) {
+        this.campoTelefone = campoTelefone;
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -46,13 +104,78 @@ public class FornecedorFormulario extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        campoNome = new javax.swing.JTextField();
+        campoNomeFantasia = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        campoCNPJ = new javax.swing.JTextField();
+        campoRazaoSocial = new javax.swing.JTextField();
+        CampoCNPJ = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        campoEmail = new javax.swing.JTextField();
+        campoTelefone = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        campoEndereco = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        campoNumero = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        campoCEP = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        campoCidade = new javax.swing.JComboBox<>();
 
-        jLabel1.setText("Nome:");
+        jLabel1.setText("Nome Fantasia:");
 
-        jLabel2.setText("CNPJ:");
+        campoNomeFantasia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoNomeFantasiaActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Razão Social");
+
+        CampoCNPJ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CampoCNPJActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("CNPJ");
+
+        campoTelefone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoTelefoneActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setText("Email");
+
+        jLabel5.setText("Telefone");
+
+        jLabel6.setText("Enderço");
+
+        campoEndereco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoEnderecoActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setText("Numero");
+
+        campoNumero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoNumeroActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("CEP");
+
+        jLabel9.setText("Cidade");
+
+        campoCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        campoCidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoCidadeActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -62,12 +185,39 @@ public class FornecedorFormulario extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel2))
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(campoCNPJ)
-                    .addComponent(campoNome, javax.swing.GroupLayout.DEFAULT_SIZE, 345, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(campoEmail, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                        .addComponent(campoRazaoSocial, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(campoCEP, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel9)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(campoCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campoTelefone)
+                    .addComponent(CampoCNPJ))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(89, 89, 89)
+                .addComponent(campoEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(campoNumero)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(89, 89, 89)
+                .addComponent(campoNomeFantasia)
+                .addGap(10, 10, 10))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -75,20 +225,79 @@ public class FornecedorFormulario extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(campoNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoNomeFantasia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(campoCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(campoRazaoSocial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CampoCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(campoEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(campoTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(campoEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel7)
+                        .addComponent(campoNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(campoCEP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9)
+                    .addComponent(campoCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void campoNomeFantasiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNomeFantasiaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoNomeFantasiaActionPerformed
+
+    private void CampoCNPJActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CampoCNPJActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CampoCNPJActionPerformed
+
+    private void campoTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoTelefoneActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoTelefoneActionPerformed
+
+    private void campoEnderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoEnderecoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoEnderecoActionPerformed
+
+    private void campoNumeroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoNumeroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoNumeroActionPerformed
+
+    private void campoCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoCidadeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoCidadeActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField campoCNPJ;
-    private javax.swing.JTextField campoNome;
+    private javax.swing.JTextField CampoCNPJ;
+    private javax.swing.JTextField campoCEP;
+    private javax.swing.JComboBox<String> campoCidade;
+    private javax.swing.JTextField campoEmail;
+    private javax.swing.JTextField campoEndereco;
+    private javax.swing.JTextField campoNomeFantasia;
+    private javax.swing.JTextField campoNumero;
+    private javax.swing.JTextField campoRazaoSocial;
+    private javax.swing.JTextField campoTelefone;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     // End of variables declaration//GEN-END:variables
 }

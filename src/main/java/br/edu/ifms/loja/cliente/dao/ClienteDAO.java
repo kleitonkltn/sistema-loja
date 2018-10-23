@@ -15,7 +15,7 @@ public class ClienteDAO extends GenericDAO<Cliente> {
         EntityManager em = getEntityManager();
 
         StringBuilder consulta = new StringBuilder();
-        consulta.append("SELECT c From Cliente c ");
+        consulta.append("SELECT c ");
         consulta.append("FROM Cliente c ");
         consulta.append("WHERE c.cpf LIKE %:cpf% ");
 
@@ -28,7 +28,7 @@ public class ClienteDAO extends GenericDAO<Cliente> {
         EntityManager em = getEntityManager();
 
         StringBuilder consulta = new StringBuilder();
-        consulta.append("SELECT c From Cliente c ");
+        consulta.append("SELECT c ");
         consulta.append("FROM Cliente c ");
         consulta.append("WHERE c.nome LIKE %:nome% ");
 
@@ -45,7 +45,7 @@ public class ClienteDAO extends GenericDAO<Cliente> {
         consulta.append("FROM Cliente c ");
         consulta.append("WHERE c.cpf LIKE :cpf ");
         consulta.append("OR c.nome LIKE :nome ");
-
+        System.out.println(consulta.toString());
         return em.createQuery(consulta.toString())
                 .setParameter("cpf", cpf+"%")
                 .setParameter("nome", nome+"%")
