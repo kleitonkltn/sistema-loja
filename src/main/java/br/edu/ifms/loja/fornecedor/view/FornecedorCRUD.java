@@ -6,7 +6,7 @@
 package br.edu.ifms.loja.fornecedor.view;
 
 import br.edu.ifms.loja.app.layouts.GenericCRUD;
-import br.edu.ifms.loja.cidade.datamodel.Cidade;
+
 import br.edu.ifms.loja.fornecedor.bo.FornecedorBO;
 import br.edu.ifms.loja.fornecedor.datamodel.Fornecedor;
 import java.awt.Frame;
@@ -27,7 +27,7 @@ public class FornecedorCRUD extends GenericCRUD<Fornecedor> {
     private FornecedorFormulario formularioFornecedor;
 
     public FornecedorCRUD(Frame parent, boolean modal) {
-        super(parent, modal, Fornecedor.class, new String[]{"id","nomefantasia","cnpj"});
+        super(parent, modal, Fornecedor.class, new String[]{"idFornecedor","nomefantasia","cnpj"});
 
         try {
             fornecedorBO = new FornecedorBO();

@@ -7,6 +7,7 @@ package br.edu.ifms.loja.app.view;
 
 import br.edu.ifms.loja.cliente.view.ClienteCRUD;
 import br.edu.ifms.loja.fornecedor.view.FornecedorCRUD;
+import br.edu.ifms.loja.produto.view.ProdutoCRUD;
 import br.edu.ifms.loja.uf.view.UFCRUD;
 import br.ifms.edu.lpii.app.utils.ImagemUtils;
 import java.io.IOException;
@@ -88,6 +89,11 @@ public class JanelaInternaCadastros extends javax.swing.JInternalFrame {
         botaoProdutos.setText("Produtos");
         botaoProdutos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         botaoProdutos.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        botaoProdutos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoProdutosActionPerformed(evt);
+            }
+        });
 
         botaoClientes.setText("Clientes");
         botaoClientes.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -188,6 +194,11 @@ public class JanelaInternaCadastros extends javax.swing.JInternalFrame {
     private void botaoCidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCidadesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_botaoCidadesActionPerformed
+
+    private void botaoProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoProdutosActionPerformed
+        ProdutoCRUD cadastroProduto = new ProdutoCRUD(null, true);
+        cadastroProduto.setVisible(true);
+    }//GEN-LAST:event_botaoProdutosActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

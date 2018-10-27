@@ -18,33 +18,34 @@ import javax.persistence.Id;
  */
 @Entity
 public class UF {
+
+    
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Resolvable(colName = "ID")
-    private Long id;
-    
-    
+    private Long idUF;
+
     @Resolvable(colName = "Nome")
     private String nome;
-    
-    
-    
+
     @Resolvable(colName = "Sigla")
     private String sigla;
-    
-    
+
     @Resolvable(colName = "ICMS")
-    private String icms;
-
-    public Long getId() {
-        return id;
-    }
-    public UF(){
-        
+    private float icms;
+    
+    
+    public Long getIdUF() {
+        return idUF;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public UF() {
+
+    }
+
+    public void setIdUF(Long idUF) {
+        this.idUF = idUF;
     }
 
     public String getNome() {
@@ -63,13 +64,12 @@ public class UF {
         this.sigla = sigla;
     }
 
-    public String getIcms() {
+    public float getIcms() {
         return icms;
     }
 
-    public void setIcms(String icms) {
+    public void setIcms(float icms) {
         this.icms = icms;
     }
-    
-    
+
 }

@@ -2,11 +2,14 @@ package br.edu.ifms.loja.cliente.datamodel;
 
 import br.edu.ifms.loja.cidade.datamodel.Cidade;
 import com.towel.el.annotation.Resolvable;
+import java.sql.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Cliente {
@@ -14,7 +17,7 @@ public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Resolvable(colName = "ID")
-    private Long id;
+    private Long idCliente;
 
     @Resolvable(colName = "Nome")
     private String nome;
@@ -22,29 +25,33 @@ public class Cliente {
     @Resolvable(colName = "CPF")
     private String cpf;
 
+    @Resolvable(colName = "Endereço")
+    private String endereco;
+
+    @Resolvable(colName = "Numero")
+    private String numero;
+
+    @Resolvable(colName = "Data de Nascimento")
+    private Date dataNascimento;
+
     @Resolvable(colName = "E-mail")
     private String email;
 
     @Resolvable(colName = "Telefone")
     private String telefone;
 
-    @Resolvable(colName = "Endereço")
-    private String endereco;
+    @Resolvable(colName = "CEP")
+    private String cep;
 
-    @Resolvable(colName = "Numero")
-    private String numero;
-    
-    
+    @ManyToOne
+    private Cidade idCidade;
 
-    public Cliente() {
+    public Long getIdCliente() {
+        return idCliente;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdCliente(Long idCliente) {
+        this.idCliente = idCliente;
     }
 
     public String getNome() {
@@ -63,6 +70,32 @@ public class Cliente {
         this.cpf = cpf;
     }
 
+    public String getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public Date getDataNascimento() {
+
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(Date dataNascimento) {
+
+        this.dataNascimento = dataNascimento;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -79,20 +112,12 @@ public class Cliente {
         this.telefone = telefone;
     }
 
-    public String getEndereco() {
-        return endereco;
+    public String getCep() {
+        return cep;
     }
 
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
-
-    public String getNumero() {
-        return numero;
-    }
-
-    public void setNumero(String numero) {
-        this.numero = numero;
+    public void setCep(String cep) {
+        this.cep = cep;
     }
 
 }

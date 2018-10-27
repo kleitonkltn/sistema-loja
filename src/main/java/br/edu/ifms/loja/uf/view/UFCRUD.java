@@ -26,7 +26,7 @@ public class UFCRUD extends GenericCRUD<UF> {
     private UFFormulario formularioUF;
 
     public UFCRUD(Frame parent, boolean modal) {
-        super(parent, modal, UF.class, new String[]{"id","nome","sigla"});
+        super(parent, modal, UF.class, new String[]{ "nome", "sigla","icms"});
         try {
             ufbo = new UFBO();
             carregarTabela();
@@ -51,7 +51,7 @@ public class UFCRUD extends GenericCRUD<UF> {
     protected void camposParaObjeto() {
         uf.setNome(formularioUF.getCampoNome().getText());
         uf.setSigla(formularioUF.getCampoSigla().getText());
-        uf.setIcms(formularioUF.getCampoICMS().getText());
+        uf.setIcms(Float.parseFloat(formularioUF.getCampoICMS().getText()));
     }
 
     @Override
@@ -59,7 +59,7 @@ public class UFCRUD extends GenericCRUD<UF> {
 
         formularioUF.getCampoNome().setText(uf.getNome());
         formularioUF.getCampoSigla().setText(uf.getSigla());
-        formularioUF.getCampoICMS().setText(uf.getIcms());
+        formularioUF.getCampoICMS().setText(String.valueOf(uf.getIcms()));
     }
 
     @Override

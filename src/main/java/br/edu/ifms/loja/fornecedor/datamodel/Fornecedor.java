@@ -1,11 +1,13 @@
 package br.edu.ifms.loja.fornecedor.datamodel;
 
+import br.edu.ifms.loja.cidade.datamodel.Cidade;
 import com.towel.el.annotation.Resolvable;
 import javax.persistence.Entity;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Fornecedor {
@@ -13,7 +15,7 @@ public class Fornecedor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Resolvable(colName = "ID")
-    private Long id;
+    private Long idFornecedor;
 
     @Resolvable(colName = "Nome Fantasia")
     private String nomefantasia;
@@ -39,12 +41,15 @@ public class Fornecedor {
     @Resolvable(colName = "Numero")
     private String numero;
 
-    public Long getId() {
-        return id;
+    @ManyToOne
+    private Cidade cidade;
+
+    public Long getIdFornecedor() {
+        return idFornecedor;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdFornecedor(Long idFornecedor) {
+        this.idFornecedor = idFornecedor;
     }
 
     public String getNomefantasia() {

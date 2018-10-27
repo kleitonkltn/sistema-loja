@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -46,8 +47,8 @@ public class Usuario {
     @Resolvable(colName = "CEP")
     private String cep;
     
-    
- 
+    @ManyToOne
+    private Cidade cidade;
 
     public Long getId() {
         return idUsuario;
@@ -112,9 +113,5 @@ public class Usuario {
     public void setCep(String cep) {
         this.cep = cep;
     }
-
-
-
-    
 
 }

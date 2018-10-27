@@ -3,38 +3,38 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.edu.ifms.loja.cidade.datamodel;
+package br.edu.ifms.loja.venda.datamodel;
 
-import br.edu.ifms.loja.uf.datamodel.UF;
+import br.edu.ifms.loja.cliente.datamodel.Cliente;
+import br.edu.ifms.loja.produto.datamodel.Produto;
+import br.edu.ifms.loja.usuario.datamodel.Usuario;
+
 import com.towel.el.annotation.Resolvable;
-
+import java.sql.Date;
 import javax.persistence.Entity;
-
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-
-import javax.persistence.OneToMany;
-
-/**
- *
- * @author NVIDIA
- */
 @Entity
-public class Cidade {
+public class Venda {
 
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Resolvable(colName = "ID")
-    private Long idCidade;
-
-    @Resolvable(colName = "Nome")
-    private String nome;
+    private Long idItemVendaVenda;
 
     @ManyToOne
-    private UF idUF;
+    private Cliente cliente;
+
+    @ManyToOne
+    private Usuario usuario;
+
+    private Date dataVenda;
+
+
+    
 
 }
