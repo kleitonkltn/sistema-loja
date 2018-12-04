@@ -17,7 +17,7 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author Gustavo
+ * @author NVIDIA
  */
 public class JanelaPrincipal extends javax.swing.JFrame {
 

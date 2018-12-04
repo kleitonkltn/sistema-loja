@@ -5,10 +5,12 @@
  */
 package br.edu.ifms.loja.app.view;
 
+import br.edu.ifms.loja.cidade.view.CidadeCRUD;
 import br.edu.ifms.loja.cliente.view.ClienteCRUD;
 import br.edu.ifms.loja.fornecedor.view.FornecedorCRUD;
 import br.edu.ifms.loja.produto.view.ProdutoCRUD;
 import br.edu.ifms.loja.uf.view.UFCRUD;
+import br.edu.ifms.loja.usuario.view.UsuarioCRUD;
 import br.ifms.edu.lpii.app.utils.ImagemUtils;
 import java.io.IOException;
 import javax.swing.ImageIcon;
@@ -17,10 +19,10 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Gustavo
+ * @author NVIDIA
  */
 public class JanelaInternaCadastros extends javax.swing.JInternalFrame {
-
+    
     private final String CAMINHO_ICONES = "img\\icons";
     private final String ICONE_CLIENTES = "network.png";
     private final String ICONE_PRODUTOS = "packing-3.png";
@@ -28,9 +30,9 @@ public class JanelaInternaCadastros extends javax.swing.JInternalFrame {
     private final String ICONE_FORNECEDORES = "trucking.png";
     private final String ICONE_UF = "map.png";
     private final String ICONE_CIDADE = "cityscape.png";
-
+    
     public static JanelaInternaCadastros janelaInternaVendas;
-
+    
     private JanelaInternaCadastros() {
         initComponents();
         setTitle("Cadastros");
@@ -38,25 +40,25 @@ public class JanelaInternaCadastros extends javax.swing.JInternalFrame {
         setClosable(true);
         carregarIcones();
     }
-
+    
     public static JanelaInternaCadastros getInstance() {
         if (janelaInternaVendas == null) {
             janelaInternaVendas = new JanelaInternaCadastros();
         }
         return janelaInternaVendas;
     }
-
+    
     private void carregarIcones() {
         try {
             ImageIcon clientes = new ImageIcon(ImagemUtils.loadImage(CAMINHO_ICONES + "\\" + ICONE_CLIENTES));
             botaoClientes.setIcon(clientes);
-
+            
             ImageIcon fornecedores = new ImageIcon(ImagemUtils.loadImage(CAMINHO_ICONES + "\\" + ICONE_FORNECEDORES));
             botaoFornecedores.setIcon(fornecedores);
-
+            
             ImageIcon produtos = new ImageIcon(ImagemUtils.loadImage(CAMINHO_ICONES + "\\" + ICONE_PRODUTOS));
             botaoProdutos.setIcon(produtos);
-
+            
             ImageIcon usuarios = new ImageIcon(ImagemUtils.loadImage(CAMINHO_ICONES + "\\" + ICONE_USUARIOS));
             botaoUsuarios.setIcon(usuarios);
             
@@ -107,6 +109,11 @@ public class JanelaInternaCadastros extends javax.swing.JInternalFrame {
         botaoUsuarios.setText("Usuarios");
         botaoUsuarios.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         botaoUsuarios.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        botaoUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoUsuariosActionPerformed(evt);
+            }
+        });
 
         botaoFornecedores.setText("Fornecedores");
         botaoFornecedores.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -187,18 +194,25 @@ public class JanelaInternaCadastros extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_botaoFornecedoresActionPerformed
 
     private void botaoUFsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoUFsActionPerformed
-        UFCRUD cadastroUf = new  UFCRUD(null, true);
+        UFCRUD cadastroUf = new UFCRUD(null, true);
         cadastroUf.setVisible(true);
     }//GEN-LAST:event_botaoUFsActionPerformed
 
     private void botaoCidadesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoCidadesActionPerformed
-        // TODO add your handling code here:
+        CidadeCRUD cadastroCidade = new CidadeCRUD(null, true);
+        cadastroCidade.setVisible(true);
     }//GEN-LAST:event_botaoCidadesActionPerformed
 
     private void botaoProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoProdutosActionPerformed
         ProdutoCRUD cadastroProduto = new ProdutoCRUD(null, true);
         cadastroProduto.setVisible(true);
     }//GEN-LAST:event_botaoProdutosActionPerformed
+
+    private void botaoUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoUsuariosActionPerformed
+        UsuarioCRUD cadastroUsuario = new UsuarioCRUD(null, true);
+        cadastroUsuario.setVisible(true);
+        
+    }//GEN-LAST:event_botaoUsuariosActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

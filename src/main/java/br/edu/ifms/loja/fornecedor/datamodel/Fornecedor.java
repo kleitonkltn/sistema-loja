@@ -44,6 +44,14 @@ public class Fornecedor {
     @ManyToOne
     private Cidade cidade;
 
+    public Cidade getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(Cidade cidade) {
+        this.cidade = cidade;
+    }
+
     public Long getIdFornecedor() {
         return idFornecedor;
     }
@@ -114,6 +122,11 @@ public class Fornecedor {
 
     public void setNumero(String numero) {
         this.numero = numero;
+    }
+
+    @Override
+    public String toString() {
+        return nomefantasia + "  /  " + razaosocial ;
     }
 
 }

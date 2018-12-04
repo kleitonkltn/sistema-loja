@@ -3,14 +3,14 @@ package br.edu.ifms.loja.cliente.bo;
 import br.edu.ifms.loja.app.bo.GenericBO;
 import br.edu.ifms.loja.cliente.dao.ClienteDAO;
 import br.edu.ifms.loja.cliente.datamodel.Cliente;
-import java.sql.SQLException;
+
 import java.util.List;
 
 public class ClienteBO extends GenericBO<Cliente>{
 
     private ClienteDAO daoCliente;
 
-    public ClienteBO() throws SQLException {
+    public ClienteBO() {
         super(Cliente.class);
         daoCliente = new ClienteDAO();
     }

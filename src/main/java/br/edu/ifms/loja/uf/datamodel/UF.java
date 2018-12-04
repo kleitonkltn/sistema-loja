@@ -40,9 +40,12 @@ public class UF {
         return idUF;
     }
 
-    public UF() {
-
+    @Override
+    public String toString() {
+        return nome + "("+sigla+")";
     }
+
+    
 
     public void setIdUF(Long idUF) {
         this.idUF = idUF;

@@ -5,7 +5,15 @@
  */
 package br.edu.ifms.loja.produto.view;
 
-import javax.swing.JComboBox;
+import br.edu.ifms.loja.fornecedor.datamodel.Fornecedor;
+import com.towel.combo.swing.ObjectComboBoxModel;
+import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.util.Currency;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.swing.JTextField;
 
 /**
@@ -17,8 +25,38 @@ public class ProdutoFormulario extends javax.swing.JPanel {
     /**
      * Creates new form ProdutoFormulario
      */
+    private ObjectComboBoxModel<Fornecedor> fornecedorModel;
+
+    private DecimalFormat formato = new DecimalFormat("#,##0.00");
+
     public ProdutoFormulario() {
         initComponents();
+        fornecedorModel = new ObjectComboBoxModel<Fornecedor>();
+        comboBoxFornecedor.setModel(fornecedorModel);
+    }
+
+    public void setSelectedFornecedor(Fornecedor f) {
+
+        if (f == null) {
+            return;
+        }
+
+        fornecedorModel.setSelectedObject(f);
+        comboBoxFornecedor.setModel(fornecedorModel);
+        comboBoxFornecedor.updateUI();
+    }
+
+    public Fornecedor getFornecedor() {
+        return fornecedorModel.getSelectedObject();
+    }
+
+    public void carregarFornecedor(List fornecedores) {
+        fornecedorModel.setData(fornecedores);
+    }
+
+    public String Moeda(String valor) throws ParseException {
+        double valorD = Double.parseDouble(valor.replaceAll("R|$| ", "").replaceAll(",", "."));
+        return formato.format(valorD).replaceAll(",", ".");
     }
 
     /**
@@ -40,7 +78,7 @@ public class ProdutoFormulario extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         campoValor = new javax.swing.JTextField();
         campoQuantidade = new javax.swing.JTextField();
-        comboFornecedor = new javax.swing.JComboBox<>();
+        comboBoxFornecedor = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
 
         jLabel1.setText("Descrição");
@@ -53,7 +91,13 @@ public class ProdutoFormulario extends javax.swing.JPanel {
 
         jLabel5.setText("Valor");
 
-        comboFornecedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        campoValor.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                campoValorFocusLost(evt);
+            }
+        });
+
+        comboBoxFornecedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel6.setText("Fornecedor");
 
@@ -83,7 +127,7 @@ public class ProdutoFormulario extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(campoModelo)
                             .addComponent(campoQuantidade, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)))
-                    .addComponent(comboFornecedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(comboBoxFornecedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -107,11 +151,20 @@ public class ProdutoFormulario extends javax.swing.JPanel {
                     .addComponent(campoQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboBoxFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void campoValorFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoValorFocusLost
+        try {
+
+            this.campoValor.setText(Moeda(campoValor.getText()));
+        } catch (ParseException ex) {
+            Logger.getLogger(ProdutoFormulario.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_campoValorFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -120,7 +173,7 @@ public class ProdutoFormulario extends javax.swing.JPanel {
     private javax.swing.JTextField campoModelo;
     private javax.swing.JTextField campoQuantidade;
     private javax.swing.JTextField campoValor;
-    private javax.swing.JComboBox<String> comboFornecedor;
+    private javax.swing.JComboBox<String> comboBoxFornecedor;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -169,11 +222,12 @@ public class ProdutoFormulario extends javax.swing.JPanel {
         this.campoValor = campoValor;
     }
 
-    public JComboBox<String> getComboFornecedor() {
-        return comboFornecedor;
+    public javax.swing.JComboBox<String> getComboBoxFornecedor() {
+        return comboBoxFornecedor;
     }
 
-    public void setComboFornecedor(JComboBox<String> comboFornecedor) {
-        this.comboFornecedor = comboFornecedor;
+    public void setComboBoxFornecedor(javax.swing.JComboBox<String> comboBoxFornecedor) {
+        this.comboBoxFornecedor = comboBoxFornecedor;
     }
+
 }

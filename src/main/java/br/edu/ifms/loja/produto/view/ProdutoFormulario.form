@@ -43,7 +43,7 @@
                           <Component id="campoQuantidade" pref="182" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <Component id="comboFornecedor" alignment="0" max="32767" attributes="0"/>
+                  <Component id="comboBoxFornecedor" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
@@ -73,7 +73,7 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="comboFornecedor" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="comboBoxFornecedor" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
@@ -114,10 +114,13 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="campoValor">
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="campoValorFocusLost"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="campoQuantidade">
     </Component>
-    <Component class="javax.swing.JComboBox" name="comboFornecedor">
+    <Component class="javax.swing.JComboBox" name="comboBoxFornecedor">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">

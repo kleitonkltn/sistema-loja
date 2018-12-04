@@ -1,15 +1,13 @@
 package br.edu.ifms.loja.produto.view;
 
 import br.edu.ifms.loja.app.layouts.GenericCRUD;
+import br.edu.ifms.loja.fornecedor.bo.FornecedorBO;
 import br.edu.ifms.loja.produto.bo.ProdutoBO;
 import br.edu.ifms.loja.produto.datamodel.Produto;
 import java.awt.Frame;
-import java.math.BigInteger;
-import java.sql.SQLException;
+import br.edu.ifms.loja.fornecedor.datamodel.Fornecedor;
 
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.swing.JPanel;
 
@@ -22,22 +20,25 @@ public class ProdutoCRUD extends GenericCRUD<Produto> {
     private Produto produto;
     private ProdutoFormulario produtoFormulario;
     private ProdutoBO produtoBO;
+    private FornecedorBO fornecedorBO;
 
     public ProdutoCRUD(Frame parent, boolean modal) {
-        super(parent, modal, Produto.class, new String[]{"descricao","valor","qtde","modelo"});
+        super(parent, modal, Produto.class, new String[]{"descricao", "valor", "qtde", "modelo"});
 
-        try {
-            produtoBO = new ProdutoBO();
-            carregarTabela();
+        produtoBO = new ProdutoBO();
+        fornecedorBO = new FornecedorBO();
+        carregarTabela();
+        carregarComboBoxFornecedor();
+    }
 
-        } catch (SQLException ex) {
-            Logger.getLogger(ProdutoCRUD.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+    public void carregarComboBoxFornecedor() {
+        List<Fornecedor> listFornecedor = fornecedorBO.listarTodos();
+        produtoFormulario.carregarFornecedor(listFornecedor);
     }
 
     @Override
-    public void setSize(int width, int height) {
+    public void setSize(int width, int height
+    ) {
         super.setSize(800, 600);
     }
 
@@ -54,8 +55,10 @@ public class ProdutoCRUD extends GenericCRUD<Produto> {
 
         produto.setDescricao(produtoFormulario.getCampoDescricao().getText());
         produto.setMarca(produtoFormulario.getCampoMarca().getText());
+        produto.setValor(Float.valueOf(produtoFormulario.getCampoValor().getText()));
         produto.setModelo(produtoFormulario.getCampoModelo().getText());
         produto.setQtde(Integer.parseInt(produtoFormulario.getCampoQuantidade().getText()));
+        produto.setFornecedor(produtoFormulario.getFornecedor());
     }
 
     @Override
@@ -63,7 +66,9 @@ public class ProdutoCRUD extends GenericCRUD<Produto> {
         produtoFormulario.getCampoDescricao().setText(produto.getDescricao());
         produtoFormulario.getCampoMarca().setText(produto.getMarca());
         produtoFormulario.getCampoModelo().setText(produto.getModelo());
+        produtoFormulario.getCampoValor().setText(String.valueOf(produto.getValor()));
         produtoFormulario.getCampoQuantidade().setText(String.valueOf((produto.getQtde())));
+        produtoFormulario.getComboBoxFornecedor().setSelectedItem(produto.getFornecedor());
     }
 
     @Override
@@ -92,7 +97,8 @@ public class ProdutoCRUD extends GenericCRUD<Produto> {
     }
 
     @Override
-    protected List buscar(String param) {
+    protected List buscar(String param
+    ) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
@@ -102,7 +108,8 @@ public class ProdutoCRUD extends GenericCRUD<Produto> {
     }
 
     @Override
-    protected void obterItemSelecionadoNaTabela(Produto itemSelecionado) {
+    protected void obterItemSelecionadoNaTabela(Produto itemSelecionado
+    ) {
         this.produto = itemSelecionado;
 
     }

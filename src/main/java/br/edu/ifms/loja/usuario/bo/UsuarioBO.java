@@ -5,10 +5,25 @@
  */
 package br.edu.ifms.loja.usuario.bo;
 
+import br.edu.ifms.loja.app.bo.GenericBO;
+import br.edu.ifms.loja.usuario.dao.UsuarioDAO;
+import br.edu.ifms.loja.usuario.datamodel.Usuario;
+import java.util.List;
+
 /**
  *
  * @author NVIDIA
  */
-public class UsuarioBO {
-    
+public class UsuarioBO extends GenericBO<Usuario> {
+
+    UsuarioDAO usuarioDAO;
+
+    public UsuarioBO() {
+        super(Usuario.class);
+        usuarioDAO = new UsuarioDAO();
+    }
+
+    public List<Usuario> buscarUsuariosPorNome(String nome) {
+        return usuarioDAO.listarUsuariosPorNome(nome);
+    }
 }

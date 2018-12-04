@@ -5,15 +5,18 @@
  */
 package br.edu.ifms.loja.app.view;
 
+import br.edu.ifms.loja.app.components.FormListarProdutos;
+import br.edu.ifms.loja.frenteDeCaixa.view.FrenteDeCaixaFormulario;
 import javax.swing.JInternalFrame;
 
 /**
  *
- * @author Gustavo
+ * @author NVIDIA
  */
 public class JanelaInternaVendas extends javax.swing.JInternalFrame {
-
+    
     private static JanelaInternaVendas janelaInternaVendas;
+    
     
     private JanelaInternaVendas() {
         initComponents();
@@ -21,14 +24,14 @@ public class JanelaInternaVendas extends javax.swing.JInternalFrame {
         setDefaultCloseOperation(JInternalFrame.HIDE_ON_CLOSE);
         setClosable(true);
     }
-
-    public static JanelaInternaVendas getInstance(){
-        if(janelaInternaVendas == null){
+    
+    public static JanelaInternaVendas getInstance() {
+        if (janelaInternaVendas == null) {
             janelaInternaVendas = new JanelaInternaVendas();
         }
         return janelaInternaVendas;
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -42,6 +45,11 @@ public class JanelaInternaVendas extends javax.swing.JInternalFrame {
         botaoRelatorios = new javax.swing.JButton();
 
         botaoFrenteDeCaixa.setText("Frente de Caixa");
+        botaoFrenteDeCaixa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoFrenteDeCaixaActionPerformed(evt);
+            }
+        });
 
         botaoRelatorios.setText("Relatórios");
 
@@ -68,6 +76,12 @@ public class JanelaInternaVendas extends javax.swing.JInternalFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void botaoFrenteDeCaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoFrenteDeCaixaActionPerformed
+        FrenteDeCaixaFormulario frenteDeCaixaFormulario = new FrenteDeCaixaFormulario();
+        frenteDeCaixaFormulario.setVisible(true);
+
+    }//GEN-LAST:event_botaoFrenteDeCaixaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

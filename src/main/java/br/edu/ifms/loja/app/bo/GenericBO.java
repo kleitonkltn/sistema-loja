@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package br.edu.ifms.loja.app.bo;
 
 import br.edu.ifms.loja.app.dao.GenericDAO;
@@ -5,7 +10,7 @@ import java.util.List;
 
 /**
  *
- * @author Gustavo
+ * @author NVIDIA
  */
 public class GenericBO<T> {
 
@@ -13,7 +18,7 @@ public class GenericBO<T> {
 
     public GenericBO(Class clazz) {
         dao = new GenericDAO<T>(clazz);
-    }   
+    }
 
     public void inserir(T t) {
         dao.inserir(t);

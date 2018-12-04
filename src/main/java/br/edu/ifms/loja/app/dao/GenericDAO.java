@@ -10,60 +10,61 @@ import javax.persistence.EntityManager;
 
 /**
  *
- * @author Gustavo
+ * @author NVIDIA
  */
-public class GenericDAO <T>{
+public class GenericDAO<T> {
+
     private EntityManager em;
     private Class<T> clazz;
-    
+
     public GenericDAO(Class<T> clazz) {
         em = FabricaDeGerenciadorDeEntidades.getEntityManager();
         this.clazz = clazz;
     }
-    
-    public void abrirTransacao(){
+
+    public void abrirTransacao() {
         em.getTransaction().begin();
     }
-    
-    public void commit(){
+
+    public void commit() {
         em.getTransaction().commit();
     }
-    
-    public void rollback(){
+
+    public void rollback() {
         em.getTransaction().rollback();
     }
-    
-    public void inserir(T t){
+
+    public void inserir(T t) {
         abrirTransacao();
         em.persist(t);
         commit();
     }
-    
-    public void atualizar(T t){
+
+    public void atualizar(T t) {
         abrirTransacao();
         em.merge(t);
         commit();
     }
-    
-    public void remover(Long id){
+
+    public void remover(Long id) {
         abrirTransacao();
         T t = buscarPorId(id);
         em.remove(t);
         commit();
     }
-    
-    public void remover(T t){
+
+    public void remover(T t) {
         abrirTransacao();
         em.remove(t);
         commit();
     }
-    
-    public T buscarPorId(Long id){
+
+    public T buscarPorId(Long id) {
         return em.find(clazz, id);
     }
-    
-    public List<T> listarTodos(){
-        return em.createQuery("SELECT t FROM "+clazz.getSimpleName()+" t")         
+
+    public List<T> listarTodos() {
+        return em.createQuery("SELECT t FROM " + clazz.getSimpleName() + " t")
                 .getResultList();
     }
 

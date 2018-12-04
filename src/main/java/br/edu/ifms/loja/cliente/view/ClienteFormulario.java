@@ -5,32 +5,46 @@
  */
 package br.edu.ifms.loja.cliente.view;
 
+import br.edu.ifms.loja.app.components.ComboBoxUFCidade;
+import br.edu.ifms.loja.cidade.datamodel.Cidade;
+import br.edu.ifms.loja.uf.datamodel.UF;
+import com.towel.combo.swing.ObjectComboBoxModel;
+import java.awt.BorderLayout;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-import javax.swing.JComboBox;
-import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
-import javax.swing.text.MaskFormatter;
 
 /**
  *
- * @author Gustavo
+ * @author NVIDIA
  */
 public class ClienteFormulario extends javax.swing.JPanel {
 
-    
+//    private ObjectComboBoxModel<UF> modelUF;
+//    private ObjectComboBoxModel<Cidade> modelCid;
+    private ComboBoxUFCidade comboBoxUfCidade;
+
+    public ComboBoxUFCidade getComboBoxUfCidade() {
+        return comboBoxUfCidade;
+    }
+
+    public void setComboBoxUfCidade(ComboBoxUFCidade comboBoxUfCidade) {
+        this.comboBoxUfCidade = comboBoxUfCidade;
+    }
 
     /**
      * Creates new form FormularioCliente
      */
-    
     public ClienteFormulario() {
         initComponents();
+
+        comboBoxUfCidade = new ComboBoxUFCidade();
+        painelUfCidade.setLayout(new BorderLayout());
+        painelUfCidade.add(comboBoxUfCidade, BorderLayout.CENTER);
+
     }
-    
-    
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -48,10 +62,6 @@ public class ClienteFormulario extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         campoEmail = new javax.swing.JTextField();
         campoDatadeNascimento = new javax.swing.JFormattedTextField(dateFormat);
-        jLabel5 = new javax.swing.JLabel();
-        comboBoxUF = new javax.swing.JComboBox<>();
-        jLabel6 = new javax.swing.JLabel();
-        comboBoxCidade = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
         campoEndereco = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
@@ -59,6 +69,7 @@ public class ClienteFormulario extends javax.swing.JPanel {
         campoTelefone = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        painelUfCidade = new javax.swing.JPanel();
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel1.setText("Nome:");
@@ -69,80 +80,74 @@ public class ClienteFormulario extends javax.swing.JPanel {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("E-mail:");
 
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel5.setText("UF:");
-
-        comboBoxUF.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel6.setText("Cidade:");
-
-        comboBoxCidade.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("Endereço:");
 
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel8.setText("Nº:");
 
+        campoTelefone.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoTelefoneActionPerformed(evt);
+            }
+        });
+
         jLabel9.setText("Telefone");
 
         jLabel10.setText("Data de Nascimento");
+
+        javax.swing.GroupLayout painelUfCidadeLayout = new javax.swing.GroupLayout(painelUfCidade);
+        painelUfCidade.setLayout(painelUfCidadeLayout);
+        painelUfCidadeLayout.setHorizontalGroup(
+            painelUfCidadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        painelUfCidadeLayout.setVerticalGroup(
+            painelUfCidadeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 37, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addGap(4, 4, 4)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(campoNome)
+                                .addComponent(campoCPF, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(campoCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(67, 67, 67)
-                                        .addComponent(campoEmail))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel10)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(campoDatadeNascimento, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE))))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(campoEndereco)
+                                .addGap(25, 25, 25))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(campoTelefone)
+                                .addGap(20, 20, 20)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(comboBoxUF, 0, 156, Short.MAX_VALUE)
-                                    .addComponent(campoEndereco, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(comboBoxCidade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(campoNumero)))
+                                .addComponent(jLabel8)
+                                .addGap(51, 51, 51)
+                                .addComponent(campoNumero, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(campoTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addComponent(jLabel3)
+                                .addGap(34, 34, 34)
+                                .addComponent(campoEmail))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel10)
+                                .addGap(34, 34, 34)
+                                .addComponent(campoDatadeNascimento, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE))))
+                    .addComponent(campoNome))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(painelUfCidade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(10, 10, 10))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,17 +175,15 @@ public class ClienteFormulario extends javax.swing.JPanel {
                         .addComponent(jLabel8)
                         .addComponent(campoEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(campoNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(comboBoxCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel6))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(comboBoxUF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel5)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(painelUfCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(19, 19, 19))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void campoTelefoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoTelefoneActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoTelefoneActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -191,28 +194,21 @@ public class ClienteFormulario extends javax.swing.JPanel {
     private javax.swing.JTextField campoNome;
     private javax.swing.JTextField campoNumero;
     private javax.swing.JTextField campoTelefone;
-    private javax.swing.JComboBox<String> comboBoxCidade;
-    private javax.swing.JComboBox<String> comboBoxUF;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel painelUfCidade;
     // End of variables declaration//GEN-END:variables
 
     DateFormat dateFormat = new SimpleDateFormat("dd/mm/yyyy");
-    
-    
-    
-    
+
     public javax.swing.JTextField getCampoNome() {
         return campoNome;
     }
-    
 
     public void setCampoNome(javax.swing.JTextField campoNome) {
         this.campoNome = campoNome;
@@ -233,6 +229,7 @@ public class ClienteFormulario extends javax.swing.JPanel {
     public void setCampoEmail(javax.swing.JTextField campoEmail) {
         this.campoEmail = campoEmail;
     }
+
     public JTextField getCampoDatadeNascimento() {
         return campoDatadeNascimento;
     }
@@ -242,11 +239,11 @@ public class ClienteFormulario extends javax.swing.JPanel {
     }
 
     public javax.swing.JTextField getCampoTelefone() {
-        return campoDatadeNascimento;
+        return campoTelefone;
     }
 
     public void setCampoTelefone(javax.swing.JTextField campoTelefone) {
-        this.campoDatadeNascimento = campoTelefone;
+        this.campoTelefone = campoTelefone;
     }
 
     public JTextField getCampoEndereco() {
@@ -265,20 +262,19 @@ public class ClienteFormulario extends javax.swing.JPanel {
         this.campoNumero = campoNumero;
     }
 
-    public JComboBox<String> getComboBoxCidade() {
-        return comboBoxCidade;
-    }
-
-    public void setComboBoxCidade(JComboBox<String> comboBoxCidade) {
-        this.comboBoxCidade = comboBoxCidade;
-    }
-
-    public JComboBox<String> getComboBoxUF() {
-        return comboBoxUF;
-    }
-
-    public void setComboBoxUF(JComboBox<String> comboBoxUF) {
-        this.comboBoxUF = comboBoxUF;
-    }
-    
+//    public JComboBox<String> getComboBoxCidade() {
+//        return comboBoxCidade;
+//    }
+//
+//    public void setComboBoxCidade(JComboBox<String> comboBoxCidade) {
+//        this.comboBoxCidade = comboBoxCidade;
+//    }
+//
+//    public JComboBox<String> getComboBoxUF() {
+//        return comboBoxUF;
+//    }
+//
+//    public void setComboBoxUF(JComboBox<String> comboBoxUF) {
+//        this.comboBoxUF = comboBoxUF;
+//    }
 }

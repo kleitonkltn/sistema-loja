@@ -7,7 +7,7 @@ package br.edu.ifms.loja.app.utils;
 
 /**
  *
- * @author Gustavo
+ * @author NVIDIA
  */
 public class Validator {
     

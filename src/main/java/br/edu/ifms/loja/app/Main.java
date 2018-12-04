@@ -14,10 +14,11 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 /**
  *
- * @author Gustavo
+ * @author NVIDIA
  */
 public class Main {
-    public static void main(String[] args) {
+
+    public static void main(String[] args) throws UnsupportedLookAndFeelException {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
             FabricaDeGerenciadorDeEntidades.getEntityManager();

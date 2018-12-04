@@ -18,7 +18,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author Gustavo
+ * @author NVIDIA
  */
 public class FornecedorCRUD extends GenericCRUD<Fornecedor> {
 
@@ -27,14 +27,11 @@ public class FornecedorCRUD extends GenericCRUD<Fornecedor> {
     private FornecedorFormulario formularioFornecedor;
 
     public FornecedorCRUD(Frame parent, boolean modal) {
-        super(parent, modal, Fornecedor.class, new String[]{"idFornecedor","nomefantasia","cnpj"});
+        super(parent, modal, Fornecedor.class, new String[]{"idFornecedor", "nomefantasia", "cnpj"});
 
-        try {
-            fornecedorBO = new FornecedorBO();
-            carregarTabela();
-        } catch (SQLException ex) {
-            Logger.getLogger(FornecedorCRUD.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        fornecedorBO = new FornecedorBO();
+        carregarTabela();
+
     }
 
     @Override
@@ -58,7 +55,8 @@ public class FornecedorCRUD extends GenericCRUD<Fornecedor> {
         fornencedor.setCep(formularioFornecedor.getCampoCEP().getText());
         fornencedor.setEndereco(formularioFornecedor.getCampoEndereco().getText());
         fornencedor.setNumero(formularioFornecedor.getCampoNumero().getText());
-        
+        fornencedor.setCidade(formularioFornecedor.getComboBoxUfCidade().getSelectedCidade());
+
     }
 
     @Override
@@ -71,7 +69,7 @@ public class FornecedorCRUD extends GenericCRUD<Fornecedor> {
         formularioFornecedor.getCampoCEP().setText(fornencedor.getCep());
         formularioFornecedor.getCampoEndereco().setText(fornencedor.getEndereco());
         formularioFornecedor.getCampoNumero().setText(fornencedor.getNumero());
-        
+        formularioFornecedor.getComboBoxUfCidade().setSelectedCidade(fornencedor.getCidade());
 
     }
 
@@ -112,7 +110,7 @@ public class FornecedorCRUD extends GenericCRUD<Fornecedor> {
 
     @Override
     protected List buscar(String param) {
-        return  fornecedorBO.buscarFornecedorPorNomeFantasia(param);
+        return fornecedorBO.buscarFornecedorPorNomeFantasia(param);
     }
 
 }

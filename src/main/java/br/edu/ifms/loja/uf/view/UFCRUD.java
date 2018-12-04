@@ -26,13 +26,10 @@ public class UFCRUD extends GenericCRUD<UF> {
     private UFFormulario formularioUF;
 
     public UFCRUD(Frame parent, boolean modal) {
-        super(parent, modal, UF.class, new String[]{ "nome", "sigla","icms"});
-        try {
-            ufbo = new UFBO();
-            carregarTabela();
-        } catch (SQLException ex) {
-            Logger.getLogger(UFCRUD.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        super(parent, modal, UF.class, new String[]{"nome", "sigla", "icms"});
+
+        ufbo = new UFBO();
+        carregarTabela();
 
     }
 

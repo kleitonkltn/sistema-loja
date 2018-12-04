@@ -32,6 +32,8 @@ public class Usuario {
     @Resolvable(colName = "Senha")
     private String senha;
 
+ 
+
     @Resolvable(colName = "Papel")
     private String papel;
 
@@ -60,6 +62,13 @@ public class Usuario {
 
     public String getEmail() {
         return email;
+    }
+       public Cidade getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(Cidade cidade) {
+        this.cidade = cidade;
     }
 
     public void setEmail(String email) {
@@ -112,6 +121,11 @@ public class Usuario {
 
     public void setCep(String cep) {
         this.cep = cep;
+    }
+
+    @Override
+    public String toString() {
+        return nome;
     }
 
 }

@@ -9,7 +9,7 @@ import br.edu.ifms.loja.app.exception.ApplicationException;
 
 /**
  *
- * @author Gustavo
+ * @author NVIDIA
  */
 public class CNPJException extends ApplicationException{
     @Override

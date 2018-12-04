@@ -8,7 +8,8 @@ package br.edu.ifms.loja.produto.bo;
 import br.edu.ifms.loja.app.bo.GenericBO;
 import br.edu.ifms.loja.produto.dao.ProdutoDAO;
 import br.edu.ifms.loja.produto.datamodel.Produto;
-import java.sql.SQLException;
+import java.util.List;
+
 
 /**
  *
@@ -18,9 +19,12 @@ public class ProdutoBO extends GenericBO<Produto> {
 
     private ProdutoDAO dao;
 
-    public ProdutoBO() throws SQLException{
+    public ProdutoBO(){
         super(Produto.class);
         dao = new ProdutoDAO();
+    }
+    public List<Produto> buscarProduto(String descricao) {
+        return dao.buscarProduto(descricao);
     }
        
 

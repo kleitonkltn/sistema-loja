@@ -13,11 +13,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+
 import javax.persistence.ManyToOne;
-
-
-import javax.persistence.OneToMany;
 
 /**
  *
@@ -35,6 +32,35 @@ public class Cidade {
     private String nome;
 
     @ManyToOne
-    private UF idUF;
+    private UF uf;
+
+    public Long getIdCidade() {
+        return idCidade;
+    }
+
+    public void setIdCidade(Long idCidade) {
+        this.idCidade = idCidade;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public UF getUf() {
+        return uf;
+    }
+
+    public void setUf(UF uf) {
+        this.uf = uf;
+    }
+
+    @Override
+    public String toString() {
+        return nome;
+    }
 
 }

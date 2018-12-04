@@ -19,7 +19,7 @@ public class UFBO extends GenericBO<UF> {
 
     private UFDAO daoUF;
 
-    public UFBO() throws SQLException {
+    public UFBO() {
         super(UF.class);
         daoUF = new UFDAO();
     }

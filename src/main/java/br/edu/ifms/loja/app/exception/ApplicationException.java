@@ -7,7 +7,7 @@ package br.edu.ifms.loja.app.exception;
 
 /**
  *
- * @author Gustavo
+ * @author NVIDIA
  */
 public class ApplicationException extends Exception{
     

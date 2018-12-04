@@ -44,7 +44,15 @@ public class Cliente {
     private String cep;
 
     @ManyToOne
-    private Cidade idCidade;
+    private Cidade cidade;
+
+    public Cidade getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(Cidade cidade) {
+        this.cidade = cidade;
+    }
 
     public Long getIdCliente() {
         return idCliente;
@@ -118,6 +126,11 @@ public class Cliente {
 
     public void setCep(String cep) {
         this.cep = cep;
+    }
+
+    @Override
+    public String toString() {
+        return nome;
     }
 
 }

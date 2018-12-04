@@ -12,7 +12,7 @@ import javax.imageio.ImageIO;
 
 /**
  *
- * @author Gustavo
+ * @author NVIDIA
  */
 public class ImagemUtils {
     public static BufferedImage loadImage(String file) throws IOException {
