@@ -32,4 +32,44 @@ public class ItemVenda {
 
     @ManyToOne
     private Venda venda;
+
+    public Long getIdItemVenda() {
+        return idItemVenda;
+    }
+
+    public void setIdItemVenda(Long idItemVenda) {
+        this.idItemVenda = idItemVenda;
+    }
+
+    public Double getValorVenda() {
+        return valorVenda;
+    }
+
+    public void setValorVenda(Double valorVenda) {
+        this.valorVenda = valorVenda;
+    }
+
+    public Integer getQtdeVenda() {
+        return qtdeVenda;
+    }
+
+    public void setQtdeVenda(Integer qtdeVenda) {
+        this.qtdeVenda = qtdeVenda;
+    }
+
+    public Produto getProduto() {
+        return produto;
+    }
+
+    public void setProduto(Produto produto) {
+        this.produto = produto;
+    }
+
+    public Venda getVenda() {
+        return venda;
+    }
+
+    public void setVenda(Venda venda) {
+        this.venda = venda;
+    }
 }

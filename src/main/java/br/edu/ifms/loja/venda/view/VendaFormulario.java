@@ -7,12 +7,22 @@ package br.edu.ifms.loja.venda.view;
 
 import br.edu.ifms.loja.cliente.bo.ClienteBO;
 import br.edu.ifms.loja.cliente.datamodel.Cliente;
+import br.edu.ifms.loja.frenteDeCaixa.view.FrenteDeCaixaFormulario;
+import br.edu.ifms.loja.itemVenda.bo.ItemVendaBO;
+import br.edu.ifms.loja.itemVenda.datamodel.ItemVenda;
 import br.edu.ifms.loja.produto.datamodel.Produto;
 import br.edu.ifms.loja.usuario.bo.UsuarioBO;
 import br.edu.ifms.loja.usuario.datamodel.Usuario;
-
+import br.edu.ifms.loja.venda.bo.VendaBO;
+import br.edu.ifms.loja.venda.datamodel.Venda;
 import com.towel.combo.swing.ObjectComboBoxModel;
+import java.awt.Color;
+import java.text.DecimalFormat;
 import java.util.List;
+import javax.swing.JTextField;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,25 +33,48 @@ public class VendaFormulario extends javax.swing.JFrame {
     /**
      * Creates new form VendaFormulario
      */
+    Date data = new Date();
+    SimpleDateFormat formatador = new SimpleDateFormat("dd/MM/yyyy");
     private ObjectComboBoxModel<Cliente> clienteModel;
     private ObjectComboBoxModel<Usuario> usuarioModel;
-    ClienteBO clienteBO;
-    UsuarioBO usuarioBO;
 
-    public VendaFormulario(String valorTotal, List<Produto> produtos) {
+    private ClienteBO clienteBO;
+    private UsuarioBO usuarioBO;
+    private VendaBO vendaBO;
+    private ItemVendaBO itemvendaBO;
+    private List<Produto> itensList;
+
+    private Venda venda;
+    private Produto produto;
+    private ItemVenda itemVenda;
+
+    double vTotal;
+    DecimalFormat formato = new DecimalFormat("0.##");
+    
+
+    public VendaFormulario(Double valorTotal, List<Produto> produtos) {
+
+        itensList = produtos;
         initComponents();
+        setBackground(Color.yellow);
         campoValorTotal.setEditable(false);
+        this.btFinalizarVenda.setEnabled(false);
         usuarioModel = new ObjectComboBoxModel<Usuario>();
         clienteModel = new ObjectComboBoxModel<Cliente>();
         clienteBO = new ClienteBO();
         usuarioBO = new UsuarioBO();
-        
+        vendaBO = new VendaBO();
+        itemvendaBO = new ItemVendaBO();
 
+        venda = new Venda();
+        
+        String dx = formato.format(valorTotal);
+        vTotal = Double.parseDouble(dx.replaceAll(",", "."));
         comboBoxCliente.setModel(clienteModel);
         comboBoxVendedor.setModel(usuarioModel);
         carregarCliente();
         carregarUsuarios();
-        campoValorTotal.setText(valorTotal);
+        campoValorTotal.setText(formato.format(valorTotal));
     }
 
     private void carregarCliente() {
@@ -60,11 +93,46 @@ public class VendaFormulario extends javax.swing.JFrame {
     public Cliente getSelectedCliente() {
         return clienteModel.getSelectedObject();
     }
-      public Usuario getSelectedUsuario() {
+
+    public Usuario getSelectedUsuario() {
         return usuarioModel.getSelectedObject();
     }
-      
-      
+
+    public void calcularTroco() {
+        double dinheiro = Double.parseDouble(getCampoDinheiro());
+        double cheque = Double.parseDouble(getCampoCheque());
+        double cartao = Double.parseDouble(getCampoCartao());
+        double vRefeicao = Double.parseDouble(getCampoVRefeicao());
+        double outros = Double.parseDouble(getCampoOutros());
+        double pago = dinheiro + cheque + cartao + vRefeicao + outros;
+        double troco = pago - vTotal;
+        if (troco >= 0) {
+            lbTroco.setForeground(Color.GREEN);
+            this.lbTroco.setText("Troco: R$" + formato.format(troco));
+            this.btFinalizarVenda.setEnabled(true);
+
+        } else {
+            this.btFinalizarVenda.setEnabled(false);
+            lbTroco.setForeground(Color.red);
+            this.lbTroco.setText("Falta: R$" + (formato.format(troco).replaceAll("-", "")));
+        }
+
+    }
+
+    public void FinalizarVenda() {
+
+        venda.setCliente(getSelectedCliente());
+        venda.setUsuario(getSelectedUsuario());
+        venda.setDataVenda(data);
+        vendaBO.inserir(venda);
+        
+        
+        itemvendaBO.inserirItens(venda, itensList, vTotal);
+        JOptionPane.showMessageDialog(null, "Venda Finalizada");
+        this.dispose();
+        
+
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -82,7 +150,7 @@ public class VendaFormulario extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         campoValorTotal = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btFinalizarVenda = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -93,11 +161,12 @@ public class VendaFormulario extends javax.swing.JFrame {
         campoVRefeicao = new javax.swing.JTextField();
         campoCheque = new javax.swing.JTextField();
         campoOutros = new javax.swing.JTextField();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        panelTroco = new javax.swing.JPanel();
+        lbTroco = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Finalizar Venda");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         comboBoxVendedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -112,6 +181,7 @@ public class VendaFormulario extends javax.swing.JFrame {
 
         campoValorTotal.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         campoValorTotal.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        campoValorTotal.setText("0.0");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("VALOR TOTAL");
@@ -137,10 +207,10 @@ public class VendaFormulario extends javax.swing.JFrame {
                 .addGap(22, 22, 22))
         );
 
-        jButton1.setText("Finalizar Venda");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btFinalizarVenda.setText("Finalizar Venda");
+        btFinalizarVenda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btFinalizarVendaActionPerformed(evt);
             }
         });
 
@@ -159,45 +229,69 @@ public class VendaFormulario extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel8.setText("Outros");
 
-        campoDinheiro.setText("0,00");
+        campoDinheiro.setText("0.00");
+        campoDinheiro.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                campoDinheiroFocusLost(evt);
+            }
+        });
 
-        campoCartao.setText("0,00");
+        campoCartao.setText("0.00");
+        campoCartao.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                campoCartaoFocusLost(evt);
+            }
+        });
 
-        campoVRefeicao.setText("0,00");
+        campoVRefeicao.setText("0.00");
+        campoVRefeicao.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                campoVRefeicaoFocusLost(evt);
+            }
+        });
 
-        campoCheque.setText("0,00");
+        campoCheque.setText("0.00");
+        campoCheque.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                campoChequeFocusLost(evt);
+            }
+        });
+        campoCheque.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoChequeActionPerformed(evt);
+            }
+        });
 
-        campoOutros.setText("0,00");
+        campoOutros.setText("0.00");
+        campoOutros.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                campoOutrosFocusLost(evt);
+            }
+        });
 
-        jPanel2.setBackground(java.awt.SystemColor.controlHighlight);
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Troco", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
+        panelTroco.setBackground(java.awt.SystemColor.controlHighlight);
+        panelTroco.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel10.setText("R$");
+        lbTroco.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        lbTroco.setForeground(java.awt.Color.green);
+        lbTroco.setText("0,00");
+        lbTroco.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 255, 153), 2, true));
 
-        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        jLabel11.setForeground(java.awt.Color.green);
-        jLabel11.setText("0,00");
-        jLabel11.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 255, 153), 2, true));
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel10)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+        javax.swing.GroupLayout panelTrocoLayout = new javax.swing.GroupLayout(panelTroco);
+        panelTroco.setLayout(panelTrocoLayout);
+        panelTrocoLayout.setHorizontalGroup(
+            panelTrocoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTrocoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbTroco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10))
-                .addGap(0, 9, Short.MAX_VALUE))
+        panelTrocoLayout.setVerticalGroup(
+            panelTrocoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTrocoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lbTroco, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -205,93 +299,150 @@ public class VendaFormulario extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(comboBoxCliente, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel2)
                     .addComponent(comboBoxVendedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel3)
+                    .addComponent(comboBoxCliente, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(73, 73, 73)
-                        .addComponent(campoDinheiro))
+                        .addComponent(campoDinheiro, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addGap(91, 91, 91)
-                        .addComponent(campoCartao))
+                        .addComponent(campoCartao, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addGap(28, 28, 28)
-                        .addComponent(campoVRefeicao))
+                        .addComponent(campoVRefeicao, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addGap(82, 82, 82)
-                        .addComponent(campoCheque))
+                        .addComponent(campoCheque, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addGap(90, 90, 90)
-                        .addComponent(campoOutros))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(campoOutros, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(panelTroco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btFinalizarVenda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(11, 11, 11)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(11, 11, 11)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(6, 6, 6)
                 .addComponent(comboBoxVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(6, 6, 6)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(6, 6, 6)
                 .addComponent(comboBoxCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(campoDinheiro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(6, 6, 6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
-                    .addComponent(campoCartao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(campoCartao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(6, 6, 6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
-                    .addComponent(campoVRefeicao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(campoVRefeicao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(6, 6, 6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel7)
-                    .addComponent(campoCheque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(campoCheque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(6, 6, 6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel8)
-                    .addComponent(campoOutros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(campoOutros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12))
+                .addComponent(panelTroco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btFinalizarVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btFinalizarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFinalizarVendaActionPerformed
+        FinalizarVenda();
+    }//GEN-LAST:event_btFinalizarVendaActionPerformed
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void campoDinheiroFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoDinheiroFocusLost
+
+        if (campoDinheiro.getText().length() > 0) {
+
+            calcularTroco();
+        } else {
+            campoDinheiro.setText("0.00");
+        }
+    }//GEN-LAST:event_campoDinheiroFocusLost
+
+    private void campoCartaoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoCartaoFocusLost
+
+        if (campoCartao.getText().length() > 0) {
+            calcularTroco();
+        } else {
+            campoCartao.setText("0.00");
+        }
+    }//GEN-LAST:event_campoCartaoFocusLost
+
+    private void campoVRefeicaoFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoVRefeicaoFocusLost
+
+        if (campoVRefeicao.getText().length() > 0) {
+            calcularTroco();
+        } else {
+            campoVRefeicao.setText("0.00");
+        }
+    }//GEN-LAST:event_campoVRefeicaoFocusLost
+
+    private void campoChequeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoChequeFocusLost
+
+        if (campoCheque.getText().length() > 0) {
+            calcularTroco();
+        } else {
+            campoCheque.setText("0.00");
+        }
+    }//GEN-LAST:event_campoChequeFocusLost
+
+    private void campoOutrosFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_campoOutrosFocusLost
+
+        if (campoOutros.getText().length() > 0) {
+
+            calcularTroco();
+        } else {
+            campoOutros.setText("0.00");
+        }
+
+    }//GEN-LAST:event_campoOutrosFocusLost
+
+    private void campoChequeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoChequeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoChequeActionPerformed
 
     /**
      * @param args the command line arguments
      */
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btFinalizarVenda;
     private javax.swing.JTextField campoCartao;
     private javax.swing.JTextField campoCheque;
     private javax.swing.JTextField campoDinheiro;
@@ -300,10 +451,7 @@ public class VendaFormulario extends javax.swing.JFrame {
     private javax.swing.JTextField campoValorTotal;
     private javax.swing.JComboBox<String> comboBoxCliente;
     private javax.swing.JComboBox<String> comboBoxVendedor;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -312,6 +460,55 @@ public class VendaFormulario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lbTroco;
+    private javax.swing.JPanel panelTroco;
     // End of variables declaration//GEN-END:variables
+        public String getCampoCartao() {
+        return campoCartao.getText();
+    }
+
+    public void setCampoCartao(String campoCartao) {
+        this.campoCartao.setText(campoCartao);
+    }
+
+    public String getCampoCheque() {
+        return campoCheque.getText();///
+    }
+
+    public void setCampoCheque(String campoCheque) {
+        this.campoCheque.setText(campoCheque);
+    }
+
+    public String getCampoDinheiro() {
+        return campoDinheiro.getText();
+    }
+
+    public void setCampoDinheiro(String campoDinheiro) {
+        this.campoDinheiro.setText(campoDinheiro);
+    }
+
+    public String getCampoOutros() {
+        return campoOutros.getText();
+    }
+
+    public void setCampoOutros(String campoOutros) {
+        this.campoOutros.setText(campoOutros);
+    }
+
+    public String getCampoVRefeicao() {
+        return campoVRefeicao.getText();
+    }
+
+    public void setCampoVRefeicao(String campoVRefeicao) {
+        this.campoVRefeicao.setText(campoVRefeicao);
+    }
+
+    public JTextField getCampoValorTotal() {
+        return campoValorTotal;
+    }
+
+    public void setCampoValorTotal(JTextField campoValorTotal) {
+        this.campoValorTotal = campoValorTotal;
+    }
+
 }

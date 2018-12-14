@@ -93,6 +93,11 @@ public class ComboBoxUFCidade extends javax.swing.JPanel {
                 comboBoxUFItemStateChanged(evt);
             }
         });
+        comboBoxUF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboBoxUFActionPerformed(evt);
+            }
+        });
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Cidade:");
@@ -133,6 +138,10 @@ public class ComboBoxUFCidade extends javax.swing.JPanel {
         }
         carregarCidades(uf);
     }//GEN-LAST:event_comboBoxUFItemStateChanged
+
+    private void comboBoxUFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxUFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_comboBoxUFActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

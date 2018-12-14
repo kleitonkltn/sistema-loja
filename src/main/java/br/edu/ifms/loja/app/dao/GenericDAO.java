@@ -36,6 +36,7 @@ public class GenericDAO<T> {
 
     public void inserir(T t) {
         abrirTransacao();
+        
         em.persist(t);
         commit();
     }

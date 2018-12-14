@@ -8,6 +8,7 @@ package br.edu.ifms.loja.venda.bo;
 import br.edu.ifms.loja.app.bo.GenericBO;
 import br.edu.ifms.loja.venda.dao.VendaDAO;
 import br.edu.ifms.loja.venda.datamodel.Venda;
+import javax.persistence.EntityManager;
 
 /**
  *

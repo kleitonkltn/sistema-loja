@@ -26,6 +26,7 @@ public class CidadeDAO extends GenericDAO<Cidade> {
     }
 
     public List<Cidade> listarCidadesPorIdUF(Long idUF) {
+        
         StringBuilder sb = new StringBuilder();
         sb.append("SELECT c ");
         sb.append("FROM Cidade c ");

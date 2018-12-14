@@ -27,7 +27,7 @@ public class ProdutoFormulario extends javax.swing.JPanel {
      */
     private ObjectComboBoxModel<Fornecedor> fornecedorModel;
 
-    private DecimalFormat formato = new DecimalFormat("#,##0.00");
+    DecimalFormat formato = new DecimalFormat("0.##");
 
     public ProdutoFormulario() {
         initComponents();
@@ -94,6 +94,16 @@ public class ProdutoFormulario extends javax.swing.JPanel {
         campoValor.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 campoValorFocusLost(evt);
+            }
+        });
+        campoValor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                campoValorActionPerformed(evt);
+            }
+        });
+        campoValor.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                campoValorKeyReleased(evt);
             }
         });
 
@@ -165,6 +175,14 @@ public class ProdutoFormulario extends javax.swing.JPanel {
             Logger.getLogger(ProdutoFormulario.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_campoValorFocusLost
+
+    private void campoValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoValorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_campoValorActionPerformed
+
+    private void campoValorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_campoValorKeyReleased
+ 
+    }//GEN-LAST:event_campoValorKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -116,6 +116,8 @@
     <Component class="javax.swing.JTextField" name="campoValor">
       <Events>
         <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="campoValorFocusLost"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="campoValorActionPerformed"/>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="campoValorKeyReleased"/>
       </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="campoQuantidade">
